@@ -1,4 +1,22 @@
 ﻿using System;
+using System.Collections;
+
+/*
+frågor.
+1. Hur fungerar stacken och heapen?
+stacken är en ordnan samling i minnet där allt ligger på hög utan några hål i den. det är sist in först ut vilket 
+ser till att minnnet hålls perfekt ordnat men det hindrar även att man lägger till saker som man inte har koll på när det behövs sättas in eller tas ur minnet.
+Heapen är för allt som behöver sparas i minne men man kan inte hålla koll på vilken exakt ordning det kommer behövas i minnet.
+Det gäller i c# reference types medans value types beror på var de deklarerades.
+
+2. Vad är value types respektive reference types?
+value types sparar ett specifikt värde medans references är stället i minnet där pointers pekar på för allt som ärver av system.object.
+
+3.
+då ReturnValue innehåller value types så är det värdet som ändras i int y.
+medans i ReturnValue2 så är det en reference som sätts till en annan reference alltså pekar både y och x mot samma object 
+och båda kan ändra det då de titta på samma object.
+*/
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -18,6 +36,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParanthesis"
+                    + "\n5. Fibona function"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -43,6 +62,19 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        Console.WriteLine(IterativeFibona(1));
+                        Console.WriteLine(IterativeFibona(2));
+                        Console.WriteLine(IterativeFibona(3));
+                        Console.WriteLine(IterativeFibona(4));
+                        Console.WriteLine(IterativeFibona(5));
+                        Console.WriteLine(IterativeFibona(6));
+                        Console.WriteLine(IterativeFibona(7));
+                        Console.WriteLine(IterativeFibona(8));
+                        Console.WriteLine(IterativeFibona(9));
+                        Console.WriteLine(IterativeFibona(10));
+                        Console.WriteLine(IterativeFibona(11));
+                        break;
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -51,11 +83,66 @@ namespace SkalProj_Datastrukturer_Minne
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4)");
+                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4, 5)");
                         break;
                 }
             }
         }
+        /*
+        fråga.
+        Vilken​​ av ovanstående ​​funktioner​​ är​​ mest ​​minnesvänlig​​ och ​​varför?(iterative vs recursive)
+        jag tror recursive behöver mer minne då den behöver hålla kolla på de tidigare användningarna av sig själv
+        */
+        private static int IterativeFibona(int n)
+        {
+            int first = 0, second = 1, result = 0, i;
+            for (i = 0; i < n; i++)
+            {
+                if (i <= 1)
+                    result = i;
+                else
+                {
+                    result = first + second;
+                    first = second;
+                    second = result;
+                }
+            }
+            return result;
+        }
+        private static int IterativeEven(int n)
+        {
+            if (n == 1) return 0;
+            int result = -4;
+            for (int i = 0; i <= n; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+        private static int RecursiveEven(int n)
+        {
+            if (n ==1)
+            {
+                return 0;
+            }
+            return (RecursiveEven(n - 1) + 2);
+        }
+        private static int RecursiveFibona(int n)
+        {
+            if (n == 0)
+            {
+                return 0;
+            }
+            else if (n == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return (RecursiveFibona(n - 1) + RecursiveFibona(n - 2));
+            }
+        }
+
 
         /// <summary>
         /// Examines the datastructure List
@@ -72,12 +159,64 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
 
-            //switch(nav){...}
+            /*Frågor
+            2. När ökar listans kapacitet?
+            När listan blir full.
+            3. Med hur mycket ökar kapaciteten?
+            Den dubblas
+            4. Varför ökar inte listans kapacitet i samma takt som element läggs till?
+            Skulle gissa att det tar tid att skapa en ny array varje gång och att den gamla 
+            arrayen ligger kvar i minnet tills den rensas bort.
+            5. Minsar kapaciteten när element tas bort ur listan?
+            Nej det gör det inte.
+            6. När är det då fördelaktigt att använda en egendefinierad array istället för
+            en lista?
+            Det verkar inte finnas så många fördelad med att använda arrays istället för list i c#. 
+            En array tar lite mindre minne, lite snabbare på att veta sin storlek, lite snabbare på att veta om den innehåller nåt specifikt.
+            En list är mycket snabbare på att sätta in/ ta ut och alla andra sätt att ändra i den. 
+            Även på arrays fördelar så är list inte så långt bakom.
+            
+
+
+
+            */
+            List<string> theList = new List<string>();
+            bool looping = true;
+            while (looping)
+            {
+                Console.WriteLine("Write a + before your string to write or a - to remove. 0 to Go Back");
+
+                string input = Console.ReadLine();
+                char nav = input[0];
+                string value = input.Substring(1);
+                switch (nav)
+                {
+
+                    case '+':
+                        theList.Add(value);
+                        Console.WriteLine("The count is: " + theList.Count);
+                        Console.WriteLine("The capacity is: " + theList.Capacity);
+                        break;
+                    case '-':
+                        theList.Remove(value);
+
+                        Console.WriteLine("The count is: " + theList.Count);
+                        Console.WriteLine("The capacity is: " + theList.Capacity); ;
+                        break;
+                    case '3':
+                        theList.ForEach(Console.WriteLine);
+                        break;
+                    case '0':
+                        looping = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter some valid input (0, -, +)");
+                        break;
+
+                }
+
+            }
         }
 
         /// <summary>
@@ -89,7 +228,50 @@ namespace SkalProj_Datastrukturer_Minne
              * Loop this method untill the user inputs something to exit to main menue.
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
+             * 
+             * 
+             * 
             */
+            Queue que = new Queue();
+            bool looping = true;
+            while (looping)
+            {
+
+                Console.WriteLine("1. add item to queue, 2 remove first element in queue. 3 print queue. 0 to Go Back");
+
+                string input = Console.ReadLine();
+                char nav = input[0];
+                switch (nav)
+                {
+
+                    case '1':
+
+                        Console.WriteLine("Insert string into queue");
+                        input = Console.ReadLine();
+                        que.Enqueue(input);
+
+                        Console.WriteLine("Queue count is: " + que.Count);
+                        break;
+                    case '2':
+                        Console.WriteLine("The removed element is: " + que.Dequeue());
+                        Console.WriteLine("Queue count is: " + que.Count);
+                        break;
+                    case '3':
+                        foreach (var var in que)
+                            Console.WriteLine(var);
+                        break;
+                    case '0':
+                        looping = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3)");
+                        break;
+
+                }
+
+            }
+
+
         }
 
         /// <summary>
@@ -102,6 +284,55 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+            // frågor. varför är det inte så smart att använda stack för en ica-kö?
+            //för att en stack tar det nyaste elementet först. så den personen som stått kortast i kö får gå först.
+
+            bool looping = true;
+            while (looping)
+            {
+
+                Console.WriteLine("1. add string to reverse, 0 to Go Back");
+
+                string input = Console.ReadLine();
+                char nav = input[0];
+
+                switch (nav)
+                {
+
+                    case '1':
+
+                        Console.WriteLine("Insert string to be reversed");
+                        input = Console.ReadLine();
+                        char[] charArr = input.ToCharArray();
+                        int size = charArr.Length;
+                        Stack stack = new Stack(size);
+
+                        int i;
+                        for (i = 0; i < size; ++i)
+                        {
+                            stack.Push(charArr[i]);
+                        }
+
+                        for (i = 0; i < size; ++i)
+                        {
+                            charArr[i] = (char)stack.Pop();
+                        }
+
+                        Console.WriteLine(charArr);
+
+                        break;
+
+                    case '0':
+                        looping = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter some valid input (0, 1)");
+                        break;
+
+                }
+
+            }
+
         }
 
         static void CheckParanthesis()
@@ -112,8 +343,96 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+            bool looping = true;
+            while (looping)
+            {
+
+                Console.WriteLine("1. add string to checked, 0 to Go Back");
+
+                string input = Console.ReadLine();
+                char nav = input[0];
+  
+
+                switch (nav)
+                {
+
+                    case '1':
+
+                        Console.WriteLine("Your string has matching brackets: " +
+                        CheckParanthesisCases());
+                        break;
+
+                    case '0':
+                        looping = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter some valid input (0, 1)");
+                        break;
+
+                }
+
+            }
+
         }
 
+        private static bool CheckParanthesisCases()
+        {
+            Stack<char> stackParent = new Stack<char>();
+            Stack<char> stackSquare = new Stack<char>();
+            Stack<char> stackCurly = new Stack<char>();
+            Console.WriteLine("Insert string to be checked");
+            String input = Console.ReadLine();
+            char[] charArr = input.ToCharArray();
+            for (int i = 0; i < charArr.Length; ++i)
+            {
+                switch (charArr[i])
+                {
+                    case ('('):
+                        stackParent.Push(charArr[i]);
+                        break;
+                    case ('['):
+                        stackSquare.Push(charArr[i]);
+                        break;
+                    case ('{'):
+                        stackCurly.Push(charArr[i]);
+                        break;
+                    case (')'):
+                        if (stackParent.Count > 0)
+                            stackParent.Pop();
+                        else
+                        {
+                            return false;
+                        }
+
+                        break;
+                    case (']'):
+                        if (stackSquare.Count > 0)
+                            stackSquare.Pop();
+                        else
+                        {
+                            return false;
+                        }
+
+                        break;
+                    case ('}'):
+                        if (stackCurly.Count > 0)
+                            stackCurly.Pop();
+                        else
+                        {
+                            return false;
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            if (stackCurly.Count == 0 && stackSquare.Count == 0 && stackParent.Count == 0)
+                return true;
+
+            return false;
+        }
     }
 }
 
