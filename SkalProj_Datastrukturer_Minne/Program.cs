@@ -36,7 +36,10 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParanthesis"
-                    + "\n5. Fibona function"
+                    + "\n5. Iterative Fibona"
+                    + "\n6. Iterative Even"
+                    + "\n7. Recursive Even"
+                    + "\n8. Recursive Fibona"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -62,37 +65,64 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
-                    case '5':
-                        Console.WriteLine(IterativeFibona(1));
-                        Console.WriteLine(IterativeFibona(2));
-                        Console.WriteLine(IterativeFibona(3));
-                        Console.WriteLine(IterativeFibona(4));
-                        Console.WriteLine(IterativeFibona(5));
-                        Console.WriteLine(IterativeFibona(6));
-                        Console.WriteLine(IterativeFibona(7));
-                        Console.WriteLine(IterativeFibona(8));
-                        Console.WriteLine(IterativeFibona(9));
-                        Console.WriteLine(IterativeFibona(10));
-                        Console.WriteLine(IterativeFibona(11));
+                    case '5':          
+                        Console.WriteLine("input number for Iterative Fibona");
+                        Console.WriteLine(IterativeFibona(GetInt32Input()));
+                         
                         break;
-                    /*
-                     * Extend the menu to include the recursive 
-                     * and iterative exercises.
-                     */
+                    case '6':
+                            Console.WriteLine("input number for Iterative Even");
+                        Console.WriteLine(IterativeEven(GetInt32Input()));
+
+                        break;
+                    case '7':
+                            Console.WriteLine("input number for Recursive Even");
+                        Console.WriteLine(RecursiveEven(GetInt32Input()));
+
+                        break;
+                    case '8':
+                            Console.WriteLine("input number for Recursive Fibona");
+                        Console.WriteLine(RecursiveFibona(GetInt32Input()));
+
+                        break;
+  
                     case '0':
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4, 5)");
+                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4, 5, 6 , 7, 8)");
                         break;
                 }
             }
         }
+
+        private static int GetInt32Input()
+        {
+            bool loop = true;
+            while (loop)
+            {
+                string number = Console.ReadLine();
+                try
+                {
+
+
+                    int num = Int32.Parse(number);
+                    return num;
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+ 
+            return 0;
+        }
+
         /*
-        fråga.
-        Vilken​​ av ovanstående ​​funktioner​​ är​​ mest ​​minnesvänlig​​ och ​​varför?(iterative vs recursive)
-        jag tror recursive behöver mer minne då den behöver hålla kolla på de tidigare användningarna av sig själv
-        */
+fråga.
+Vilken​​ av ovanstående ​​funktioner​​ är​​ mest ​​minnesvänlig​​ och ​​varför?(iterative vs recursive)
+jag tror recursive behöver mer minne då den behöver hålla kolla på de tidigare användningarna av sig själv
+*/
         private static int IterativeFibona(int n)
         {
             int first = 0, second = 1, result = 0, i;
