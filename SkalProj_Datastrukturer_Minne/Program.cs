@@ -65,27 +65,27 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
-                    case '5':          
+                    case '5':
                         Console.WriteLine("input number for Iterative Fibona");
                         Console.WriteLine(IterativeFibona(GetInt32Input()));
-                         
+
                         break;
                     case '6':
-                            Console.WriteLine("input number for Iterative Even");
+                        Console.WriteLine("input number for Iterative Even");
                         Console.WriteLine(IterativeEven(GetInt32Input()));
 
                         break;
                     case '7':
-                            Console.WriteLine("input number for Recursive Even");
+                        Console.WriteLine("input number for Recursive Even");
                         Console.WriteLine(RecursiveEven(GetInt32Input()));
 
                         break;
                     case '8':
-                            Console.WriteLine("input number for Recursive Fibona");
+                        Console.WriteLine("input number for Recursive Fibona");
                         Console.WriteLine(RecursiveFibona(GetInt32Input()));
 
                         break;
-  
+
                     case '0':
                         Environment.Exit(0);
                         break;
@@ -114,7 +114,7 @@ namespace SkalProj_Datastrukturer_Minne
                     Console.WriteLine(e.Message);
                 }
             }
- 
+
             return 0;
         }
 
@@ -151,7 +151,7 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
         }
         private static int RecursiveEven(int n)
         {
-            if (n ==1)
+            if (n == 1)
             {
                 return 0;
             }
@@ -218,32 +218,39 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
                 Console.WriteLine("Write a + before your string to write or a - to remove. 0 to Go Back");
 
                 string input = Console.ReadLine();
-                char nav = input[0];
-                string value = input.Substring(1);
-                switch (nav)
+                if (!string.IsNullOrEmpty(input))
                 {
+                    char nav = input[0];
+                    string value = input.Substring(1);
 
-                    case '+':
-                        theList.Add(value);
-                        Console.WriteLine("The count is: " + theList.Count);
-                        Console.WriteLine("The capacity is: " + theList.Capacity);
-                        break;
-                    case '-':
-                        theList.Remove(value);
 
-                        Console.WriteLine("The count is: " + theList.Count);
-                        Console.WriteLine("The capacity is: " + theList.Capacity); ;
-                        break;
-                    case '3':
-                        theList.ForEach(Console.WriteLine);
-                        break;
-                    case '0':
-                        looping = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please enter some valid input (0, -, +)");
-                        break;
 
+
+                    switch (nav)
+                    {
+
+                        case '+':
+                            theList.Add(value);
+                            Console.WriteLine("The count is: " + theList.Count);
+                            Console.WriteLine("The capacity is: " + theList.Capacity);
+                            break;
+                        case '-':
+                            theList.Remove(value);
+
+                            Console.WriteLine("The count is: " + theList.Count);
+                            Console.WriteLine("The capacity is: " + theList.Capacity); ;
+                            break;
+                        case '3':
+                            theList.ForEach(Console.WriteLine);
+                            break;
+                        case '0':
+                            looping = false;
+                            break;
+                        default:
+                            Console.WriteLine("Please enter some valid input (0, -, +)");
+                            break;
+
+                    }
                 }
 
             }
@@ -270,33 +277,36 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
                 Console.WriteLine("1. add item to queue, 2 remove first element in queue. 3 print queue. 0 to Go Back");
 
                 string input = Console.ReadLine();
-                char nav = input[0];
-                switch (nav)
+                if (!string.IsNullOrEmpty(input))
                 {
+                    char nav = input[0];
+                    switch (nav)
+                    {
 
-                    case '1':
+                        case '1':
 
-                        Console.WriteLine("Insert string into queue");
-                        input = Console.ReadLine();
-                        que.Enqueue(input);
+                            Console.WriteLine("Insert string into queue");
+                            input = Console.ReadLine();
+                            que.Enqueue(input);
 
-                        Console.WriteLine("Queue count is: " + que.Count);
-                        break;
-                    case '2':
-                        Console.WriteLine("The removed element is: " + que.Dequeue());
-                        Console.WriteLine("Queue count is: " + que.Count);
-                        break;
-                    case '3':
-                        foreach (var var in que)
-                            Console.WriteLine(var);
-                        break;
-                    case '0':
-                        looping = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3)");
-                        break;
+                            Console.WriteLine("Queue count is: " + que.Count);
+                            break;
+                        case '2':
+                            Console.WriteLine("The removed element is: " + que.Dequeue());
+                            Console.WriteLine("Queue count is: " + que.Count);
+                            break;
+                        case '3':
+                            foreach (var var in que)
+                                Console.WriteLine(var);
+                            break;
+                        case '0':
+                            looping = false;
+                            break;
+                        default:
+                            Console.WriteLine("Please enter some valid input (0, 1, 2, 3)");
+                            break;
 
+                    }
                 }
 
             }
@@ -324,41 +334,44 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
                 Console.WriteLine("1. add string to reverse, 0 to Go Back");
 
                 string input = Console.ReadLine();
-                char nav = input[0];
-
-                switch (nav)
+                if (!string.IsNullOrEmpty(input))
                 {
+                    char nav = input[0];
 
-                    case '1':
+                    switch (nav)
+                    {
 
-                        Console.WriteLine("Insert string to be reversed");
-                        input = Console.ReadLine();
-                        char[] charArr = input.ToCharArray();
-                        int size = charArr.Length;
-                        Stack stack = new Stack(size);
+                        case '1':
 
-                        int i;
-                        for (i = 0; i < size; ++i)
-                        {
-                            stack.Push(charArr[i]);
-                        }
+                            Console.WriteLine("Insert string to be reversed");
+                            input = Console.ReadLine();
+                            char[] charArr = input.ToCharArray();
+                            int size = charArr.Length;
+                            Stack stack = new Stack(size);
 
-                        for (i = 0; i < size; ++i)
-                        {
-                            charArr[i] = (char)stack.Pop();
-                        }
+                            int i;
+                            for (i = 0; i < size; ++i)
+                            {
+                                stack.Push(charArr[i]);
+                            }
 
-                        Console.WriteLine(charArr);
+                            for (i = 0; i < size; ++i)
+                            {
+                                charArr[i] = (char)stack.Pop();
+                            }
 
-                        break;
+                            Console.WriteLine(charArr);
 
-                    case '0':
-                        looping = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please enter some valid input (0, 1)");
-                        break;
+                            break;
 
+                        case '0':
+                            looping = false;
+                            break;
+                        default:
+                            Console.WriteLine("Please enter some valid input (0, 1)");
+                            break;
+
+                    }
                 }
 
             }
@@ -381,24 +394,26 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
 
                 string input = Console.ReadLine();
                 char nav = input[0];
-  
 
-                switch (nav)
+                if (!string.IsNullOrEmpty(input))
                 {
+                    switch (nav)
+                    {
 
-                    case '1':
+                        case '1':
 
-                        Console.WriteLine("Your string has matching brackets: " +
-                        CheckParanthesisCases());
-                        break;
+                            Console.WriteLine("Your string has matching brackets: " +
+                            CheckParanthesisCases());
+                            break;
 
-                    case '0':
-                        looping = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please enter some valid input (0, 1)");
-                        break;
+                        case '0':
+                            looping = false;
+                            break;
+                        default:
+                            Console.WriteLine("Please enter some valid input (0, 1)");
+                            break;
 
+                    }
                 }
 
             }
@@ -407,9 +422,7 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
 
         private static bool CheckParanthesisCases()
         {
-            Stack<char> stackParent = new Stack<char>();
-            Stack<char> stackSquare = new Stack<char>();
-            Stack<char> stackCurly = new Stack<char>();
+            Stack<char> stackLeftside = new Stack<char>();
             Console.WriteLine("Insert string to be checked");
             String input = Console.ReadLine();
             char[] charArr = input.ToCharArray();
@@ -418,39 +431,22 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
                 switch (charArr[i])
                 {
                     case ('('):
-                        stackParent.Push(charArr[i]);
-                        break;
                     case ('['):
-                        stackSquare.Push(charArr[i]);
-                        break;
                     case ('{'):
-                        stackCurly.Push(charArr[i]);
+                        stackLeftside.Push(charArr[i]);
                         break;
                     case (')'):
-                        if (stackParent.Count > 0)
-                            stackParent.Pop();
-                        else
-                        {
-                            return false;
-                        }
-
+                        if (stackLeftside.Count > 0 && stackLeftside.Peek() == '(')
+                            stackLeftside.Pop();
                         break;
                     case (']'):
-                        if (stackSquare.Count > 0)
-                            stackSquare.Pop();
-                        else
-                        {
-                            return false;
-                        }
-
+                        if (stackLeftside.Count > 0 && stackLeftside.Peek() == '[')
+                            stackLeftside.Pop();
                         break;
+
                     case ('}'):
-                        if (stackCurly.Count > 0)
-                            stackCurly.Pop();
-                        else
-                        {
-                            return false;
-                        }
+                        if (stackLeftside.Count > 0 && stackLeftside.Peek() == '{')
+                            stackLeftside.Pop();
 
                         break;
                     default:
@@ -458,7 +454,7 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
                 }
 
             }
-            if (stackCurly.Count == 0 && stackSquare.Count == 0 && stackParent.Count == 0)
+            if (stackLeftside.Count == 0)
                 return true;
 
             return false;
