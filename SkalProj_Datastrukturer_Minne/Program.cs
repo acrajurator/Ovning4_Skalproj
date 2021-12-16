@@ -438,15 +438,18 @@ jag tror recursive behöver mer minne då den behöver hålla kolla på de tidig
                     case (')'):
                         if (stackLeftside.Count > 0 && stackLeftside.Peek() == '(')
                             stackLeftside.Pop();
+                        else return false;
                         break;
                     case (']'):
                         if (stackLeftside.Count > 0 && stackLeftside.Peek() == '[')
                             stackLeftside.Pop();
+                        else return false;
                         break;
 
                     case ('}'):
                         if (stackLeftside.Count > 0 && stackLeftside.Peek() == '{')
                             stackLeftside.Pop();
+                        else return false;
 
                         break;
                     default:
